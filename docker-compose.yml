@@ -1,0 +1,22 @@
+version: '2'
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - '8180:80'
+    links:
+      - db
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=docker
+    ports:
+      - '8182:3306'
+  adminer:
+    image: adminer
+    ports:
+      - '8181:8080'
