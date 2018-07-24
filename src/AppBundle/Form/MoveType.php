@@ -30,6 +30,12 @@ class MoveType extends AbstractType
                     new NotBlank(),
                 ],
             ])
+            ->add(Character\Move::FIELD_COMMAND, TextType::class,[
+                'label'=>'Command: ',
+                'constraints'=>[
+                    new NotBlank(),
+                ],
+            ])
             ->add(Character\Move::FIELD_HIT_LEVEL, ChoiceType::class,[
                 'label'=>'Hit level: ',
                 'constraints'=>[

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ character.name }}</h1>
+    <ul>
+        <li>Nationality: {{ character.nationality }}</li>
+        <li>Difficulty: {{ character.difficulty }}</li>
+        <li>Fighting style: {{ character.fightStyle }}</li>
+    </ul>
+    <a type="button" class="button primary" href="{{ path('create_move',{'id':character.id}) }}">Create new move</a>
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}

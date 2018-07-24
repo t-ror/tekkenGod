@@ -76,7 +76,7 @@ class Character
     /**
      * @var string
      *
-     * @ORM\Column(name="miniature", type="string", length=255)
+     * @ORM\Column(name="miniature", type="string", length=255, nullable=true)
      *
      */
     private $miniature;
@@ -84,7 +84,7 @@ class Character
     /**
      * @var string
      *
-     * @ORM\Column(name="picture", type="string", length=255)
+     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      *
      */
     private $picture;
