@@ -142,7 +142,7 @@ class Move
     /**
      * @var string
      *
-     * @ORM\Column(name="range", type="string", length=255)
+     * @ORM\Column(name="move_range", type="string", length=255)
      *
      */
     private $range;

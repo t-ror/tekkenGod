@@ -9,26 +9,47 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Character;
+use AppBundle\Entity\Character\Move;
+use AppBundle\Form\MoveType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 
 class MoveController extends Controller
 {
     /**
      *  @Route("/create/move/{id}", name="create_move")
      */
-    public function createAction(){
-//        $entityObj = new Character();
-//        $form = $this->createForm(CharacterType::class, $entityObj);
-//        $form->add('submit', SubmitType::class,[
-//            'label' => 'Create',
-//            'attr' => [
-//                'class' => 'button',
-//            ]
-//        ]);
-//        return $this->render('create/character.html.twig', [
-//            'form' => $form->createView(),
-//        ]);
+    public function createAction(Request $request, $id){
+        $move = new Move();
+        $form = $this->createForm(MoveType::class, $move);
+        $form->add('submit', SubmitType::class,[
+            'label' => 'Create',
+            'attr' => [
+                'class' => 'button',
+            ]
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $move->setCharacter(
+                $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository(Character::class)
+                    ->find($id)
+            );
+            $move->setEditDate(new \DateTime());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($move);
+            $em->flush();
+
+            return $this->redirectToRoute('show_character',['id'=>$id]);
+        }
+
+        return $this->render('create/move.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**

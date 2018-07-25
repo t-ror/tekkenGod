@@ -12,6 +12,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Character;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -47,28 +48,28 @@ class MoveType extends AbstractType
                     'Low'=>'Low',
                 ],
             ])
-            ->add(Character\Move::FIELD_START_UP_FRAME, TextType::class,[
+            ->add(Character\Move::FIELD_START_UP_FRAME, IntegerType::class,[
                 'label'=>'Start up frame: ',
                 'constraints'=>[
                     new NotBlank(),
                     new Type('integer'),
                 ],
             ])
-            ->add(Character\Move::FIELD_BLOCK_FRAME, TextType::class,[
-                'label'=>'Start up frame: ',
+            ->add(Character\Move::FIELD_BLOCK_FRAME, IntegerType::class,[
+                'label'=>'Block frame: ',
                 'constraints'=>[
                     new NotBlank(),
                     new Type('integer'),
                 ],
             ])
-            ->add(Character\Move::FIELD_HIT_FRAME, TextType::class,[
+            ->add(Character\Move::FIELD_HIT_FRAME, IntegerType::class,[
                 'label'=>'Hit frame: ',
                 'constraints'=>[
                     new NotBlank(),
                     new Type('integer'),
                 ],
             ])
-            ->add(Character\Move::FIELD_DAMAGE, TextType::class,[
+            ->add(Character\Move::FIELD_DAMAGE, IntegerType::class,[
                 'label'=>'Damage: ',
                 'constraints'=>[
                     new NotBlank(),
@@ -84,6 +85,12 @@ class MoveType extends AbstractType
                     'Left'=>'Left',
                     'Right'=>'Right',
                     'Homing'=>'Homing',
+                ],
+            ])
+            ->add(Character\Move::FIELD_COUNTER_HIT, TextType::class,[
+                'label'=>'Counter hit: ',
+                'constraints'=>[
+                    new NotBlank(),
                 ],
             ])
             ->add(Character\Move::FIELD_RANGE, TextType::class,[

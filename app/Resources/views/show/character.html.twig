@@ -8,6 +8,31 @@
         <li>Fighting style: {{ character.fightStyle }}</li>
     </ul>
     <a type="button" class="button primary" href="{{ path('create_move',{'id':character.id}) }}">Create new move</a>
+    <h2>Moves</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Command</th>
+            <th>Hit level</th>
+            <th>Startup frame</th>
+            <th>Block frame</th>
+            <th>Hit frame</th>
+            <th>Counter hit</th>
+            <th>Note</th>
+        </tr>
+        {% for move in character.moves %}
+            <tr>
+                <td>{{ move.name }}</td>
+                <td>{{ move.command }}</td>
+                <td>{{ move.hitLevel }}</td>
+                <td>{{ move.startUpFrame }}</td>
+                <td>{{ move.blockFrame }}</td>
+                <td>{{ move.hitFrame }}</td>
+                <td>{{ move.counterHit }}</td>
+                <td>{{ move.note }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
 
 {% block stylesheets %}
