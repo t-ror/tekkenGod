@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Character;
 use AppBundle\Form\CharacterType;
+use AppBundle\Service\FileUploader;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,7 +22,7 @@ class CharacterController extends Controller
     /**
      *  @Route("/create/character", name="create_character")
      */
-    public function createAction(Request $request){
+    public function createAction(Request $request, FileUploader $fileUploader){
         $character = new Character();
         $form = $this->createForm(CharacterType::class, $character);
         $form->add('submit', SubmitType::class,[
@@ -32,6 +33,22 @@ class CharacterController extends Controller
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
+            $file = $character->getMiniature();
+            $fileName = $fileUploader->upload(
+                $file,
+                $this->getParameter('char_miniature_directory')
+            );
+
+            $character->setMiniature($fileName);
+
+            $file = $character->getPicture();
+            $fileName = $fileUploader->upload(
+                $file,
+                $this->getParameter('char_picture_directory')
+            );
+
+            $character->setPicture($fileName);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($character);
             $em->flush();

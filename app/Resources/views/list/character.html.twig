@@ -4,10 +4,11 @@
     <h1>Characters</h1>
     <table>
         <tr>
-            <th>Name</th><th>Nationality</th><th>Difficulty</th><th>Fighting style</th>
+            <th></th><th>Name</th><th>Nationality</th><th>Difficulty</th><th>Fighting style</th>
             {% for character in characters %}
                 <tr>
-                    <td><a href="{{ path('show_character',{'id':character.id}) }}">{{ character.name }}</td>
+            <td><a href="{{ path('show_character',{'id':character.id}) }}"><img class="char-min-img" src="/files/images/characters/miniatures/{{ character.miniature }}"></a></td>
+                    <td><a href="{{ path('show_character',{'id':character.id}) }}">{{ character.name }}</a></td>
                     <td>{{ character.nationality }}</td>
                     <td>{{ character.difficulty }}</td>
                     <td>{{ character.fightStyle }}</td>

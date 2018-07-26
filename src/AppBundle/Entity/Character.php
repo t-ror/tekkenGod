@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 use AppBundle\Entity\Character\Move;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -76,7 +77,12 @@ class Character
     /**
      * @var string
      *
-     * @ORM\Column(name="miniature", type="string", length=255, nullable=true)
+     * @ORM\Column(name="miniature", type="string", nullable=true)
+     *
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     * )
      *
      */
     private $miniature;
@@ -84,7 +90,12 @@ class Character
     /**
      * @var string
      *
-     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
+     * @ORM\Column(name="picture", type="string", nullable=true)
+     *
+     * @Assert\File(
+     *     maxSize = "2024k",
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     * )
      *
      */
     private $picture;

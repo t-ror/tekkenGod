@@ -2,12 +2,15 @@
 
 {% block body %}
     <h1>{{ character.name }}</h1>
+    <img class="char-img" src="/files/images/characters/{{ character.picture }}" alt="{{ character.name }}">
     <ul>
         <li>Nationality: {{ character.nationality }}</li>
         <li>Difficulty: {{ character.difficulty }}</li>
         <li>Fighting style: {{ character.fightStyle }}</li>
     </ul>
-    <a type="button" class="button primary" href="{{ path('create_move',{'id':character.id}) }}">Create new move</a>
+    {% if is_granted('ROLE_ADMIN')  %}
+        <a type="button" class="button primary" href="{{ path('create_move',{'id':character.id}) }}">Create new move</a>
+    {% endif %}
     <h2>Moves</h2>
     <table>
         <tr>

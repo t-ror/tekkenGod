@@ -162,8 +162,6 @@ class Move
      */
     private $character;
 
-
-
     /**
      * Get id
      *

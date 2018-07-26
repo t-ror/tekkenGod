@@ -12,8 +12,10 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Character;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
@@ -50,6 +52,14 @@ class CharacterType extends AbstractType
                 'constraints'=>[
                     new NotBlank(),
                 ],
+            ])
+            ->add(Character::FIELD_MINIATURE, FileType::class, [
+                'label' => 'Character miniature(JPG/PNG): ',
+
+            ])
+            ->add(Character::FIELD_PICTURE, FileType::class, [
+                'label' => 'Character picture(JPG/PNG): ',
+
             ])
         ;
     }
