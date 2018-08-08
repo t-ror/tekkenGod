@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CharacterType extends AbstractType
 {
@@ -53,13 +54,11 @@ class CharacterType extends AbstractType
                     new NotBlank(),
                 ],
             ])
-            ->add(Character::FIELD_MINIATURE, FileType::class, [
-                'label' => 'Character miniature(JPG/PNG): ',
-
+            ->add(Character::FIELD_IMAGE_FILE, VichImageType::class,[
+                'label'=>'Character image: ',
             ])
-            ->add(Character::FIELD_PICTURE, FileType::class, [
-                'label' => 'Character picture(JPG/PNG): ',
-
+            ->add(Character::FIELD_MINIATURE_FILE, VichImageType::class,[
+                'label'=>'Character miniature: ',
             ])
         ;
     }

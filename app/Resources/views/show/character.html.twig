@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>{{ character.name }}</h1>
-    <img class="char-img" src="/files/images/characters/{{ character.picture }}" alt="{{ character.name }}">
+    <img class="char-img" src="/files/images/characters/{{ character.image }}" alt="{{ character.name }}">
     <ul>
         <li>Nationality: {{ character.nationality }}</li>
         <li>Difficulty: {{ character.difficulty }}</li>
@@ -10,6 +10,8 @@
     </ul>
     {% if is_granted('ROLE_ADMIN')  %}
         <a type="button" class="button primary" href="{{ path('create_move',{'id':character.id}) }}">Create new move</a>
+        <a type="button" class="button primary" href="{{ path('edit_character',{'id':character.id}) }}">Edit character info</a>
+        <a type="button" class="button alert" href="{{ path('delete_character',{'id':character.id}) }}">Delete character</a>
     {% endif %}
     <h2>Moves</h2>
     <table>
@@ -22,6 +24,9 @@
             <th>Hit frame</th>
             <th>Counter hit</th>
             <th>Note</th>
+            {% if is_granted('ROLE_ADMIN')  %}
+                <th></th>
+            {% endif %}
         </tr>
         {% for move in character.moves %}
             <tr>
@@ -33,6 +38,9 @@
                 <td>{{ move.hitFrame }}</td>
                 <td>{{ move.counterHit }}</td>
                 <td>{{ move.note }}</td>
+                {% if is_granted('ROLE_ADMIN')  %}
+                    <td><a type="button" class="button alert" href="{{ path('delete_move',{'id':move.id}) }}">Delete</a></td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>

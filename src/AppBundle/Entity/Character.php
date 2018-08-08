@@ -11,7 +11,9 @@ namespace AppBundle\Entity;
 use AppBundle\Entity\Character\Move;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 
@@ -20,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="app_characters")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CharacterRepository")
+ * @Vich\Uploadable
  */
 class Character
 {
@@ -28,8 +31,8 @@ class Character
     const FIELD_DIFFICULTY = 'difficulty';
     const FIELD_NATIONALITY = 'nationality';
     const FIELD_FIGHT_STYLE = 'fightStyle';
-    const FIELD_MINIATURE = 'miniature';
-    const FIELD_PICTURE = 'picture';
+    const FIELD_MINIATURE_FILE = 'miniatureFile';
+    const FIELD_IMAGE_FILE = 'imageFile';
     const FIELD_MOVES = 'moves';
 
     /**
@@ -74,31 +77,21 @@ class Character
      */
     private $fightStyle;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="miniature", type="string", nullable=true)
-     *
-     * @Assert\File(
-     *     maxSize = "1024k",
-     *     mimeTypes = {"image/jpeg", "image/png"},
-     * )
-     *
-     */
-    private $miniature;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="picture", type="string", nullable=true)
-     *
-     * @Assert\File(
-     *     maxSize = "2024k",
-     *     mimeTypes = {"image/jpeg", "image/png"},
-     * )
-     *
-     */
-    private $picture;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="miniature", type="string", nullable=true)
+//     *
+//     */
+//    private $miniature;
+//
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="picture", type="string", nullable=true)
+//     *
+//     */
+//    private $picture;
 
     /**
      * @var Move[]|Collection
@@ -106,6 +99,34 @@ class Character
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Character\Move", mappedBy="character", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $moves;
+
+    /**
+     * @Vich\UploadableField(mapping="character_image", fileNameProperty="image")
+     *
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="character_miniature", fileNameProperty="miniature")
+     *
+     * @var File
+     */
+    private $miniatureFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $miniature;
 
     /**
      * Get id
@@ -212,54 +233,7 @@ class Character
     {
         return $this->fightStyle;
     }
-
-    /**
-     * Set miniature
-     *
-     * @param string $miniature
-     *
-     * @return Character
-     */
-    public function setMiniature($miniature)
-    {
-        $this->miniature = $miniature;
-
-        return $this;
-    }
-
-    /**
-     * Get miniature
-     *
-     * @return string
-     */
-    public function getMiniature()
-    {
-        return $this->miniature;
-    }
-
-    /**
-     * Set picture
-     *
-     * @param string $picture
-     *
-     * @return Character
-     */
-    public function setPicture($picture)
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
-    /**
-     * Get picture
-     *
-     * @return string
-     */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
+    
     /**
      * Constructor
      */
@@ -301,4 +275,106 @@ class Character
     {
         return $this->moves;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return int
+     */
+    public function getImageSize()
+    {
+        return $this->imageSize;
+    }
+
+    /**
+     * @param int $imageSize
+     */
+    public function setImageSize($imageSize)
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    /**
+     * @return File
+     */
+    public function getMiniatureFile()
+    {
+        return $this->miniatureFile;
+    }
+
+    /**
+     * @param File $miniatureFile
+     */
+    public function setMiniatureFile($miniatureFile)
+    {
+        $this->miniatureFile = $miniatureFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMiniature()
+    {
+        return $this->miniature;
+    }
+
+    /**
+     * @param string $miniature
+     */
+    public function setMiniature($miniature)
+    {
+        $this->miniature = $miniature;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMiniatureSize()
+    {
+        return $this->miniatureSize;
+    }
+
+    /**
+     * @param int $miniatureSize
+     */
+    public function setMiniatureSize($miniatureSize)
+    {
+        $this->miniatureSize = $miniatureSize;
+    }
+
 }

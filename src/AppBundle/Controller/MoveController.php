@@ -22,17 +22,18 @@ class MoveController extends Controller
     /**
      *  @Route("/create/move/{id}", name="create_move")
      */
-    public function createAction(Request $request, $id){
+    public function createAction(Request $request, $id)
+    {
         $move = new Move();
         $form = $this->createForm(MoveType::class, $move);
-        $form->add('submit', SubmitType::class,[
+        $form->add('submit', SubmitType::class, [
             'label' => 'Create',
             'attr' => [
                 'class' => 'button',
             ]
         ]);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $move->setCharacter(
                 $this->getDoctrine()
                     ->getManager()
@@ -44,7 +45,7 @@ class MoveController extends Controller
             $em->persist($move);
             $em->flush();
 
-            return $this->redirectToRoute('show_character',['id'=>$id]);
+            return $this->redirectToRoute('show_character', ['id' => $id]);
         }
 
         return $this->render('create/move.html.twig', [
@@ -53,16 +54,21 @@ class MoveController extends Controller
     }
 
     /**
-     *  @Route("/list/moves/{id}", name="list_move")
+     * @Route("delete/move/{id}", name="delete_move")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function listAction(){
-//        $characters = $this->getDoctrine()
-//            ->getManager()
-//            ->getRepository(Character::class)
-//            ->findAll();
-//
-//        return $this->render('list/character.html.twig', [
-//            'characters' => $characters,
-//        ]);
+
+    public function deleteAction($id){
+       $move = $this->getDoctrine()
+           ->getRepository(Move::class)
+           ->find($id);
+       $charId = $move->getCharacter()->getId();
+
+       $em = $this->getDoctrine()->getManager();
+       $em->remove($move);
+       $em->flush();
+
+       return $this->redirectToRoute('show_character',['id'=>$charId]);
     }
 }

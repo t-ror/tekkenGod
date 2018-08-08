@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <img class="char-img" src="/files/images/characters/{{ character.picture }}" alt="{{ character.name }}">
+    VS
+    <img class="char-img" src="/files/images/characters/{{ opponent.picture }}" alt="{{ opponent.name }}">
+
+    <h1>Choose move to punish</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <h2>Moves</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Command</th>
+            <th>Hit level</th>
+            <th>Startup frame</th>
+            <th>Block frame</th>
+            <th>Hit frame</th>
+            <th>Counter hit</th>
+            <th>Note</th>
+        </tr>
+        {% for move in moves %}
+            <tr>
+                <td>{{ move.name }}</td>
+                <td>{{ move.command }}</td>
+                <td>{{ move.hitLevel }}</td>
+                <td>{{ move.startUpFrame }}</td>
+                <td>{{ move.blockFrame }}</td>
+                <td>{{ move.hitFrame }}</td>
+                <td>{{ move.counterHit }}</td>
+                <td>{{ move.note }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}

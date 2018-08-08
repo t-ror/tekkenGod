@@ -483,4 +483,11 @@ class Move
     {
         return $this->character;
     }
+
+    public function __toString()
+    {
+        return $this->name.', '.$this->command.', '.$this->startUpFrame.', '.$this->blockFrame;
+    }
+
+
 }

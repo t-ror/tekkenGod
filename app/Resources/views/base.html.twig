@@ -32,6 +32,8 @@
 
             <li><a href="{{ path('homepage')}}">Home</a></li>
 
+            <li><a href="{{ path('fdhelper_index')}}">Framedata helper</a></li>
+
             <li><a href="{{ path('list_character')}}">Characters</a></li>
             {% if is_granted('ROLE_ADMIN')  %}
                 <li><a href="{{ path('create_character')}}">Create character</a></li>

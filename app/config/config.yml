@@ -76,3 +76,23 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        character_image:
+            uri_prefix: /images/characters/
+            upload_destination: '%kernel.project_dir%/web/files/images/characters'
+            namer: vich_uploader.namer_uniqid
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+        character_miniature:
+          uri_prefix: /images/characters/
+          upload_destination: '%kernel.project_dir%/web/files/images/characters/miniatures'
+          namer: vich_uploader.namer_uniqid
+
+          inject_on_load: false
+          delete_on_update: true
+          delete_on_remove: true
