@@ -23,6 +23,7 @@
             <th>Block frame</th>
             <th>Hit frame</th>
             <th>Counter hit</th>
+            <th>Launcher</th>
             <th>Note</th>
             {% if is_granted('ROLE_ADMIN')  %}
                 <th></th>
@@ -37,6 +38,13 @@
                 <td>{{ move.blockFrame }}</td>
                 <td>{{ move.hitFrame }}</td>
                 <td>{{ move.counterHit }}</td>
+                <td>
+                    {% if move.launcher == true %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </td>
                 <td>{{ move.note }}</td>
                 {% if is_granted('ROLE_ADMIN')  %}
                     <td><a type="button" class="button alert" href="{{ path('delete_move',{'id':move.id}) }}">Delete</a></td>

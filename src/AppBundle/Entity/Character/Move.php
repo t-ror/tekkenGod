@@ -11,21 +11,6 @@ namespace AppBundle\Entity\Character;
 use AppBundle\Entity\Character;
 use Doctrine\ORM\Mapping as ORM;
 
-const FIELD_ID = 'id';
-const FIELD_NAME = 'name';
-const FIELD_COMMAND = 'command';
-const FIELD_HIT_LEVEL = 'hitLevel';
-const FIELD_DAMAGE = 'damage';
-const FIELD_START_UP_FRAME = 'startUpFrame';
-const FIELD_HIT_FRAME = 'hitFrame';
-const FIELD_BLOCK_FRAME = 'blockFrame';
-const FIELD_COUNTER_HIT = 'counterHit';
-const FIELD_NOTE = 'note';
-const FIELD_TRACKING = 'tracking';
-const FIELD_RANGE = 'range';
-const FIELD_EDIT_DATE = 'editDate';
-const FIELD_CHARACTER = 'character';
-
 /**
  * Move
  *
@@ -48,6 +33,7 @@ class Move
     const FIELD_RANGE = 'range';
     const FIELD_EDIT_DATE = 'editDate';
     const FIELD_CHARACTER = 'character';
+    const FIELD_LAUNCHER = 'launcher';
 
     /**
      * @var int
@@ -161,6 +147,14 @@ class Move
      *
      */
     private $character;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="launcher", type="boolean")
+     *
+     */
+    private $launcher;
 
     /**
      * Get id
@@ -483,6 +477,23 @@ class Move
     {
         return $this->character;
     }
+
+    /**
+     * @return bool
+     */
+    public function isLauncher()
+    {
+        return $this->launcher;
+    }
+
+    /**
+     * @param bool $launcher
+     */
+    public function setLauncher($launcher)
+    {
+        $this->launcher = $launcher;
+    }
+
 
     public function __toString()
     {

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <img class="char-img" src="/files/images/characters/{{ character.picture }}" alt="{{ character.name }}">
+    <img class="char-img" src="/files/images/characters/{{ character.image }}" alt="{{ character.name }}">
     VS
-    <img class="char-img" src="/files/images/characters/{{ opponent.picture }}" alt="{{ opponent.name }}">
+    <img class="char-img" src="/files/images/characters/{{ opponent.image }}" alt="{{ opponent.name }}">
 
     <h1>Choose move to punish</h1>
     {{ form_start(form) }}

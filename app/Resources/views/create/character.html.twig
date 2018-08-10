@@ -3,7 +3,14 @@
 {% block body %}
     <h1>Create character</h1>
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.difficulty) }}
+    {{ form_row(form.nationality) }}
+    {{ form_row(form.fightStyle) }}
+    <p>Character image:</p>
+    {{ form_row(form.imageFile) }}
+    <p>Character miniature:</p>
+    {{ form_row(form.miniatureFile) }}
     {{ form_end(form) }}
 {% endblock %}
 

@@ -54,7 +54,10 @@ class FrameDataHelperController extends Controller
                 }
             ])
             ->add('submit',SubmitType::class,[
-                'label'=>'Find punishes'
+                'label'=>'Find punishes',
+                'attr' => [
+                    'class' => 'button',
+                ],
             ])
             ->getForm();
 

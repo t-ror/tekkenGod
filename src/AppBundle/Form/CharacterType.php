@@ -55,10 +55,10 @@ class CharacterType extends AbstractType
                 ],
             ])
             ->add(Character::FIELD_IMAGE_FILE, VichImageType::class,[
-                'label'=>'Character image: ',
+                'label'=> false,
             ])
             ->add(Character::FIELD_MINIATURE_FILE, VichImageType::class,[
-                'label'=>'Character miniature: ',
+                'label'=>false,
             ])
         ;
     }

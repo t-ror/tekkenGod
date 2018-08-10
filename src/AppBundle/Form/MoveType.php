@@ -99,6 +99,17 @@ class MoveType extends AbstractType
                     new NotBlank(),
                 ],
             ])
+            ->add(Character\Move::FIELD_LAUNCHER, ChoiceType::class,[
+                'label'=>'Launcher: ',
+                'constraints'=>[
+                    new NotNull(),
+                ],
+                'expanded'=>'yes',
+                'choices'=>[
+                    'Yes'=>true,
+                    'No'=>false,
+                ],
+            ])
             ->add(Character\Move::FIELD_NOTE, TextareaType::class,[
                 'label'=>'Note: ',
             ])
