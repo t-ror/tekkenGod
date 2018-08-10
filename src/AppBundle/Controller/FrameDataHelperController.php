@@ -14,6 +14,7 @@ use AppBundle\Form\FrameDataHelperType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,6 +54,14 @@ class FrameDataHelperController extends Controller
                         ->setParameter('character',$opponent);
                 }
             ])
+            ->add('launcher', ChoiceType::class,[
+                'label'=>'Launcher: ',
+                'expanded'=>true,
+                'choices'=>[
+                    'Yes'=>true,
+                    'No'=>false,
+                ],
+            ])
             ->add('submit',SubmitType::class,[
                 'label'=>'Find punishes',
                 'attr' => [
@@ -68,7 +77,7 @@ class FrameDataHelperController extends Controller
         if ($form->get('move')->getData() != null){
             $moves = $this->getDoctrine()
                 ->getRepository(Character\Move::class)
-                ->getPunishes($form->get('move')->getData(), $character->getId());
+                ->getPunishes($form->get('move')->getData(), $character->getId(), $form->get('launcher')->getData());
         }
 
         return $this->render(':fdhelper:compare.html.twig',[

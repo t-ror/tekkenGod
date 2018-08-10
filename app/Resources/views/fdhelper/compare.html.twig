@@ -4,10 +4,14 @@
     <img class="char-img" src="/files/images/characters/{{ character.image }}" alt="{{ character.name }}">
     VS
     <img class="char-img" src="/files/images/characters/{{ opponent.image }}" alt="{{ opponent.name }}">
+    <br>
+    <a href="{{ path('fdhelper_compare', {'character': opponent.id, 'opponent': character.id}) }}" class="button">Swap</a>
 
     <h1>Choose move to punish</h1>
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.move) }}
+    <h3>Filters</h3>
+    {{ form_row(form.launcher) }}
     {{ form_end(form) }}
     <h2>Moves</h2>
     <table>

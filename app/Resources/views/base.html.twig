@@ -60,6 +60,7 @@
 
                 <li style="margin-right: 15px">Logged in as <strong>{{ app.user.username }}</strong> </li>
 
+                <li><a href="{{ path('fos_user_profile_show') }}" class="button">Profile</a></li>
                 <li><a href="{{ logout_path() }}" class="button alert">Logout</a></li>
 
             {% else %}

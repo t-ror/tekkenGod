@@ -14,17 +14,19 @@ use Doctrine\ORM\EntityRepository;
 
 class MoveRepository extends EntityRepository
 {
-    public function getPunishes(Move $move, $charId){
+    public function getPunishes(Move $move, $charId, $launcher){
         $qb = $this->getEntityManager()
             ->createQueryBuilder()
             ->select('m')
             ->from('AppBundle:Character\Move','m')
-            ->where('(m.startUpFrame - :move) >= 0')
-            ->andWhere('m.character = :character')
-            ->setParameters(['move'=> $move->getBlockFrame(),'character'=>$charId])
-            ->getQuery()
-            ->getResult();
+            ->where('(m.startUpFrame + :move) <= 0')
+            ->andWhere('m.character = :character');
+        if ($launcher==true){
+            $qb->andWhere('m.launcher = 1');
+        }
+        $qb->setParameters(['move'=> $move->getBlockFrame(),'character'=>$charId]);
 
-        return $qb;
+        return $qb->getQuery()
+            ->getResult();
     }
 }
