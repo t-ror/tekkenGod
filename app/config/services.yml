@@ -34,3 +34,7 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
     AppBundle\Service\FileUploader:
+    app.form.registration:
+        class: AppBundle\Form\User\EditType
+        tags:
+        - { name: form.type, alias: app_user_edit }

@@ -77,22 +77,6 @@ class Character
      */
     private $fightStyle;
 
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="miniature", type="string", nullable=true)
-//     *
-//     */
-//    private $miniature;
-//
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="picture", type="string", nullable=true)
-//     *
-//     */
-//    private $picture;
-
     /**
      * @var Move[]|Collection
      *

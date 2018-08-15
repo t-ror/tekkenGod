@@ -56,7 +56,7 @@ class CharacterController extends Controller
         $characters = $this->getDoctrine()
             ->getManager()
             ->getRepository(Character::class)
-            ->findAll(['name'=>'ASC']);
+            ->findBy([],['name'=>'ASC']);
 
         return $this->render('list/character.html.twig', [
             'characters' => $characters,

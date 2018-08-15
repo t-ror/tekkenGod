@@ -56,9 +56,21 @@ class CharacterType extends AbstractType
             ])
             ->add(Character::FIELD_IMAGE_FILE, VichImageType::class,[
                 'label'=> false,
+                'constraints'=>[
+                    new File([
+                        'maxSize'=>'2048k',
+                        'mimeTypes'=>['image/jpeg','image/png']
+                    ]),
+                ]
             ])
             ->add(Character::FIELD_MINIATURE_FILE, VichImageType::class,[
-                'label'=>false,
+                'label'=>false,'constraints'=>[
+                    new File([
+                        'maxSize'=>'4096k',
+                        'mimeTypes'=>['image/jpeg','image/png']
+                    ]),
+                ]
+
             ])
         ;
     }
