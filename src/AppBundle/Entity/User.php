@@ -68,7 +68,7 @@ class User extends BaseUser
         $this->imageFile = $imageFile;
 
         if ($imageFile) {
-            $this->updatedAt = new \DateTime('now');
+            $this->setLastUpdate(new \DateTime('now'));
         }
     }
 

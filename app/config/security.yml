@@ -49,3 +49,7 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/create/character, role: ROLE_ADMIN }
+        - { path: ^/create/move, role: ROLE_ADMIN }
+        - { path: ^/edit/character, role: ROLE_ADMIN }
+        - { path: ^/edit/move, role: ROLE_ADMIN }

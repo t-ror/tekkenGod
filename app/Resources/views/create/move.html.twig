@@ -3,7 +3,18 @@
 {% block body %}
     <h1>Create move</h1>
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.command) }}
+    {{ form_row(form.hitLevel) }}
+    {{ form_row(form.startUpFrame) }}
+    {{ form_row(form.blockFrame) }}
+    {{ form_row(form.hitFrame) }}
+    {{ form_row(form.damage) }}
+    {{ form_row(form.tracking) }}
+    {{ form_row(form.counterHit) }}
+    {{ form_row(form.range) }}
+    {{ form_row(form.launcher) }}
+    {{ form_row(form.note) }}
     {{ form_end(form) }}
 {% endblock %}
 
