@@ -4,18 +4,35 @@
     <h1>Create move</h1>
     {{ form_start(form) }}
     {{ form_row(form.name) }}
+    <button onclick="setCommand('b')">Back</button>
+    <button onclick="setCommand('u')">Up</button>
+    <button onclick="setCommand('d')">Down</button>
+    <button onclick="setCommand('f')">Forward</button>
+    <button onclick="setCommand('+')">+</button>
+    <button onclick="setCommand('~')">~</button>
+    <button onclick="setCommand('/')">/</button>
+    <button onclick="setCommand('*')">Hold</button>
+    <button onclick="setCommand('1')">1</button>
+    <button onclick="setCommand('2')">2</button>
+    <button onclick="setCommand('3')">3</button>
+    <button onclick="setCommand('4')">4</button>
+    <button onclick="setCommand('wr')">While running</button>
+    <button onclick="setCommand('ws')">While standing</button>
+    <button onclick="clearCommand()">Clear</button>
     {{ form_row(form.command) }}
     {{ form_row(form.hitLevel) }}
     {{ form_row(form.startUpFrame) }}
     {{ form_row(form.blockFrame) }}
     {{ form_row(form.hitFrame) }}
+    {{ form_row(form.counterHit) }}
     {{ form_row(form.damage) }}
     {{ form_row(form.tracking) }}
-    {{ form_row(form.counterHit) }}
     {{ form_row(form.range) }}
-    {{ form_row(form.launcher) }}
     {{ form_row(form.note) }}
     {{ form_end(form) }}
+
+
+    <script src="{{ asset('js/commandInput.js') }}"></script>
 {% endblock %}
 
 {% block stylesheets %}

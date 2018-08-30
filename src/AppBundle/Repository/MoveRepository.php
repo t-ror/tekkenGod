@@ -22,7 +22,7 @@ class MoveRepository extends EntityRepository
             ->where('(m.startUpFrame + :move) <= 0')
             ->andWhere('m.character = :character');
         if ($launcher==true){
-            $qb->andWhere('m.launcher = 1');
+            $qb->andWhere('m.hitFrame LIKE "Launcher"');
         }
         $qb->setParameters(['move'=> $move->getBlockFrame(),'character'=>$charId]);
 

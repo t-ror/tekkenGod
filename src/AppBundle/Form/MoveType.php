@@ -62,11 +62,10 @@ class MoveType extends AbstractType
                     new Type('integer'),
                 ],
             ])
-            ->add(Character\Move::FIELD_HIT_FRAME, IntegerType::class,[
+            ->add(Character\Move::FIELD_HIT_FRAME, TextType::class,[
                 'label'=>'Hit frame: ',
                 'constraints'=>[
                     new NotBlank(),
-                    new Type('integer'),
                 ],
             ])
             ->add(Character\Move::FIELD_DAMAGE, IntegerType::class,[
@@ -97,17 +96,6 @@ class MoveType extends AbstractType
                 'label'=>'Range: ',
                 'constraints'=>[
                     new NotBlank(),
-                ],
-            ])
-            ->add(Character\Move::FIELD_LAUNCHER, ChoiceType::class,[
-                'label'=>'Launcher: ',
-                'constraints'=>[
-                    new NotNull(),
-                ],
-                'expanded'=>'yes',
-                'choices'=>[
-                    'Yes'=>true,
-                    'No'=>false,
                 ],
             ])
             ->add(Character\Move::FIELD_NOTE, TextareaType::class,[

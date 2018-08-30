@@ -94,9 +94,9 @@ class Move
     private $blockFrame;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="hit_frame", type="integer")
+     * @ORM\Column(name="hit_frame", type="string", length=255)
      *
      */
     private $hitFrame;
@@ -147,14 +147,6 @@ class Move
      *
      */
     private $character;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="launcher", type="boolean")
-     *
-     */
-    private $launcher;
 
     /**
      * Get id
@@ -477,23 +469,6 @@ class Move
     {
         return $this->character;
     }
-
-    /**
-     * @return bool
-     */
-    public function isLauncher()
-    {
-        return $this->launcher;
-    }
-
-    /**
-     * @param bool $launcher
-     */
-    public function setLauncher($launcher)
-    {
-        $this->launcher = $launcher;
-    }
-
 
     public function __toString()
     {
