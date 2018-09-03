@@ -21,6 +21,7 @@ class EditType extends AbstractType
     {
         $builder->add(User::FIELD_IMAGE_FILE, VichImageType::class,[
             'label'=>false,
+            'required'=>false,
             'constraints'=>[
                 new File([
                     'maxSize'=>'2048k',

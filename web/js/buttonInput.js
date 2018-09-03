@@ -24,9 +24,22 @@ function setCommand(command){
     }
 }
 
-function clearCommand(){
+function setHitLevel(hitLevel){
     try{
-        document.getElementById('move_command').value = "";
+        var text = "";
+        if (document.getElementById('move_hitLevel').value !== ""){
+            text +=", ";
+        }
+        text += hitLevel;
+        document.getElementById('move_hitLevel').value += text;
+    }catch (e) {
+        alert(e);
+    }
+}
+
+function clearField(field){
+    try{
+        document.getElementById(field).value = "";
     }catch (e) {
         alert(e);
     }

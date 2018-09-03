@@ -31,6 +31,11 @@ class MoveController extends Controller
             'attr' => [
                 'class' => 'button',
             ]
+        ])->add('submitNext', SubmitType::class, [
+            'label' => 'Create and add next',
+            'attr' => [
+                'class' => 'button',
+            ]
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -44,7 +49,9 @@ class MoveController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($move);
             $em->flush();
-
+            if ($form->get('submitNext')->isClicked()){
+                return $this->redirectToRoute('create_move', ['id' => $id]);
+            }
             return $this->redirectToRoute('show_character', ['id' => $id]);
         }
 

@@ -37,15 +37,10 @@ class MoveType extends AbstractType
                     new NotBlank(),
                 ],
             ])
-            ->add(Character\Move::FIELD_HIT_LEVEL, ChoiceType::class,[
+            ->add(Character\Move::FIELD_HIT_LEVEL, TextType::class,[
                 'label'=>'Hit level: ',
                 'constraints'=>[
-                    new NotNull(),
-                ],
-                'choices'=>[
-                    'High'=>'High',
-                    'Mid'=>'Mid',
-                    'Low'=>'Low',
+                    new NotBlank(),
                 ],
             ])
             ->add(Character\Move::FIELD_START_UP_FRAME, IntegerType::class,[

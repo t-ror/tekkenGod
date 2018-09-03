@@ -4,35 +4,51 @@
     <h1>Create move</h1>
     {{ form_start(form) }}
     {{ form_row(form.name) }}
-    <button onclick="setCommand('b')">Back</button>
-    <button onclick="setCommand('u')">Up</button>
-    <button onclick="setCommand('d')">Down</button>
-    <button onclick="setCommand('f')">Forward</button>
-    <button onclick="setCommand('+')">+</button>
-    <button onclick="setCommand('~')">~</button>
-    <button onclick="setCommand('/')">/</button>
-    <button onclick="setCommand('*')">Hold</button>
-    <button onclick="setCommand('1')">1</button>
-    <button onclick="setCommand('2')">2</button>
-    <button onclick="setCommand('3')">3</button>
-    <button onclick="setCommand('4')">4</button>
-    <button onclick="setCommand('wr')">While running</button>
-    <button onclick="setCommand('ws')">While standing</button>
-    <button onclick="clearCommand()">Clear</button>
+    <a onclick="setCommand('b')">Back</a>
+    <a onclick="setCommand('u')">Up</a>
+    <a onclick="setCommand('d')">Down</a>
+    <a onclick="setCommand('f')">Forward</a>
+    <a onclick="setCommand('+')">+</a>
+    <a onclick="setCommand('~')">~</a>
+    <a onclick="setCommand('/')">/</a>
+    <a onclick="setCommand('*')">Hold</a>
+    <a onclick="setCommand('1')">1</a>
+    <a onclick="setCommand('2')">2</a>
+    <a onclick="setCommand('3')">3</a>
+    <a onclick="setCommand('4')">4</a>
+    <a onclick="setCommand('wr')">While running</a>
+    <a onclick="setCommand('ws')">While standing</a>
+    <a onclick="clearField('move_command')">Clear</a>
     {{ form_row(form.command) }}
+    <a onclick="setHitLevel('h')">High</a>
+    <a onclick="setHitLevel('m')">Mid</a>
+    <a onclick="setHitLevel('l')">Low</a>
+    <a onclick="clearField('move_hitLevel')">Clear</a>
     {{ form_row(form.hitLevel) }}
-    {{ form_row(form.startUpFrame) }}
-    {{ form_row(form.blockFrame) }}
-    {{ form_row(form.hitFrame) }}
+    <table style="padding: 0px; margin: 0px; text-align: left; border: transparent">
+        <th style="padding: 0px; margin: 0px; text-align: left">
+            {{ form_row(form.startUpFrame) }}
+        </th>
+        <th style="padding: 0px; margin: 0px; text-align: left">
+            {{ form_row(form.blockFrame) }}
+        </th>
+        <th style="padding: 0px; margin: 0px; text-align: left">
+            {{ form_row(form.hitFrame) }}
+        </th>
+    </table>
     {{ form_row(form.counterHit) }}
     {{ form_row(form.damage) }}
     {{ form_row(form.tracking) }}
     {{ form_row(form.range) }}
     {{ form_row(form.note) }}
+    <div style="float: left; padding-right: 10px">
+    {{ form_row(form.submit) }}
+    </div>
+    {{ form_row(form.submitNext) }}
     {{ form_end(form) }}
 
 
-    <script src="{{ asset('js/commandInput.js') }}"></script>
+    <script src="{{ asset('js/buttonInput.js') }}"></script>
 {% endblock %}
 
 {% block stylesheets %}
