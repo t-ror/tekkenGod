@@ -9,7 +9,6 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Entity\Character\Move;
-use AppBundle\Entity\Character\Stance;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -84,13 +83,6 @@ class Character
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Character\Move", mappedBy="character", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $moves;
-
-    /**
-     * @var Stance[]|Collection
-     *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Character\Stance", mappedBy="character", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $stances;
 
     /**
      * @Vich\UploadableField(mapping="character_image", fileNameProperty="image")
@@ -368,5 +360,4 @@ class Character
     {
         $this->miniatureSize = $miniatureSize;
     }
-
 }

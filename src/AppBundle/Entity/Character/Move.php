@@ -48,7 +48,7 @@ class Move
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      *
      */
     private $name;
@@ -64,7 +64,7 @@ class Move
     /**
      * @var string
      *
-     * @ORM\Column(name="hit_level", type="string", length=255)
+     * @ORM\Column(name="hit_level", type="string", length=255, nullable=true)
      *
      */
     private $hitLevel;
@@ -72,7 +72,7 @@ class Move
     /**
      * @var int
      *
-     * @ORM\Column(name="damage", type="integer")
+     * @ORM\Column(name="damage", type="integer", nullable=true)
      *
      */
     private $damage;
@@ -80,7 +80,7 @@ class Move
     /**
      * @var int
      *
-     * @ORM\Column(name="start_up_frame", type="integer")
+     * @ORM\Column(name="start_up_frame", type="integer", nullable=true)
      *
      */
     private $startUpFrame;
@@ -88,7 +88,7 @@ class Move
     /**
      * @var int
      *
-     * @ORM\Column(name="block_frame", type="integer")
+     * @ORM\Column(name="block_frame", type="integer", nullable=true)
      *
      */
     private $blockFrame;
@@ -96,7 +96,7 @@ class Move
     /**
      * @var string
      *
-     * @ORM\Column(name="hit_frame", type="string", length=255)
+     * @ORM\Column(name="hit_frame", type="string", length=255, nullable=true)
      *
      */
     private $hitFrame;
@@ -104,7 +104,7 @@ class Move
     /**
      * @var string
      *
-     * @ORM\Column(name="counter_hit", type="string", length=255)
+     * @ORM\Column(name="counter_hit", type="string", length=255, nullable=true)
      *
      */
     private $counterHit;
@@ -112,7 +112,7 @@ class Move
     /**
      * @var string
      *
-     * @ORM\Column(name="note", type="string", length=255, nullable=true)
+     * @ORM\Column(name="note", type="string", length=255, nullable=true, nullable=true)
      *
      */
     private $note;
@@ -120,7 +120,7 @@ class Move
     /**
      * @var string
      *
-     * @ORM\Column(name="tracking", type="string", length=255)
+     * @ORM\Column(name="tracking", type="string", length=255, nullable=true)
      *
      */
     private $tracking;
@@ -128,7 +128,7 @@ class Move
     /**
      * @var string
      *
-     * @ORM\Column(name="move_range", type="string", length=255)
+     * @ORM\Column(name="move_range", type="string", length=255, nullable=true)
      *
      */
     private $range;
