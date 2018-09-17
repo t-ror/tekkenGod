@@ -2,31 +2,40 @@ $(document).foundation()
 
 var lastCommand = "";
 
-function getCommand(command){
+function getCommand(command, separator = ""){
     var commands = {
-        "f" : "Forward",
-        "b" : "Back",
-        "u" : "Up",
-        "d" : "Down",
-        "1" : "1",
-        "2" : "2",
-        "3" : "3",
-        "4" : "4",
+        "f" : "<img src='/files/images/controls/f"+separator+".png'>",
+        "b" : "<img src='/files/images/controls/b"+separator+".png'>",
+        "u" : "<img src='/files/images/controls/u"+separator+".png'>",
+        "u/b" : "<img src='/files/images/controls/ub"+separator+".png'>",
+        "u/f" : "<img src='/files/images/controls/uf"+separator+".png'>",
+        "d" : "<img src='/files/images/controls/d"+separator+".png'>",
+        "d/b" : "<img src='/files/images/controls/db"+separator+".png'>",
+        "d/f" : "<img src='/files/images/controls/df"+separator+".png'>",
+        "1" : "<img src='/files/images/controls/1.png'>",
+        "2" : "<img src='/files/images/controls/2.png'>",
+        "3" : "<img src='/files/images/controls/3.png'>",
+        "4" : "<img src='/files/images/controls/4.png'>",
         "ws" : "While standing",
         "wr" : "While running",
-        "~" : "~",
-        "*" : "*",
-        "1+2" : "1+2",
-        "1+3" : "1+3",
-        "1+4" : "1+4",
-        "2+3" : "2+3",
-        "2+4" : "2+4",
-        "3+4" : "3+4",
-        "1+2+3" : "1+2+3",
-        "1+2+4" : "1+2+4",
-        "1+3+4" : "1+3+4",
-        "2+3+4" : "2+3+4",
-        "default" : "",
+        "wc" : "While crouching",
+        "od" : "Opponent down",
+        "wh" : "When hit",
+        "ir" : "In rage",
+        "*" : "Hold",
+        "n" : "<img src='/files/images/controls/n.png'>",
+        "12" : "<img src='/files/images/controls/1+2.png'>",
+        "13" : "<img src='/files/images/controls/1+3.png'>",
+        "14" : "<img src='/files/images/controls/1+3.png'>",
+        "23" : "<img src='/files/images/controls/2+3.png'>",
+        "24" : "<img src='/files/images/controls/2+4.png'>",
+        "34" : "<img src='/files/images/controls/3+4.png'>",
+        "123" : "<img src='/files/images/controls/1+2+3.png'>",
+        "124" : "<img src='/files/images/controls/1+2+4.png'>",
+        "134" : "<img src='/files/images/controls/1+3+4.png'>",
+        "234" : "<img src='/files/images/controls/2+3+4.png'>",
+        "1234" : "<img src='/files/images/controls/1+2+3+4.png'>",
+        "default" : command,
     };
 
     return commands[command] || commands["default"];
@@ -60,9 +69,36 @@ function setCommand(command){
 function convertCommand(text){
     try{
         var commands = text.split(',');
+        var text = "";
         document.getElementById("show_command").innerHTML = "";
         for (i = 0; i < commands.length; i++){
-            document.getElementById("show_command").innerHTML += getCommand(commands[i])+" ";
+            if (commands[i].search('\\+')>0){
+                var direction = "";
+                var tempTextArray = commands[i].split('+');
+                if(commands[i].search('f')>=0 ||
+                    commands[i].search('b')>=0 ||
+                    commands[i].search("u")>=0 ||
+                    commands[i].search("d")>=0 ||
+                    commands[i].search("d/f")>=0 ||
+                    commands[i].search("u/f")>=0 ||
+                    commands[i].search("d/b")>=0 ||
+                    commands[i].search("u/b")>=0
+                ){
+                    direction = getCommand(tempTextArray[0],"+");
+                    tempTextArray[0] = "";
+                }
+                document.getElementById("show_command").innerHTML += direction + getCommand(convertString(tempTextArray), "+")+" ";
+            }else if(commands[i].search('~') > 0){
+                var tempTextArray = commands[i].split('~');
+                var tempText = "<img src='/files/images/controls/[.png'>";
+                for (j = 0; j < tempTextArray.length; j++) {
+                    tempText += getCommand(tempTextArray[j]);
+                }
+                tempText += "<img src='/files/images/controls/].png'>";
+                document.getElementById("show_command").innerHTML += tempText+" ";
+            }else{
+                document.getElementById("show_command").innerHTML += getCommand(commands[i])+" ";
+            }
         }
     }catch (e) {
         alert(e);
@@ -91,4 +127,13 @@ function clearField(field){
     }catch (e) {
         alert(e);
     }
+}
+
+function convertString(stringArray){
+    stringArray.sort();
+    var tempText = "";
+    for (j = 0; j < stringArray.length; j++){
+        tempText += stringArray[j];
+    }
+    return tempText;
 }

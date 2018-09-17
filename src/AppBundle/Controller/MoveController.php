@@ -38,9 +38,9 @@ class MoveController extends Controller
             ]
         ]);
         $form->handleRequest($request);
-        $character = $this->getDoctrine()
-            ->getRepository(Character::class)
-            ->find($id);
+        $stances = $this->getDoctrine()
+            ->getRepository(Move::class)
+            ->getStances($id);
         if ($form->isSubmitted() && $form->isValid()) {
             $move->setCharacter(
                 $this->getDoctrine()
@@ -60,7 +60,7 @@ class MoveController extends Controller
 
         return $this->render('create/move.html.twig', [
             'form' => $form->createView(),
-            'character' => $character,
+            'stances' => $stances,
         ]);
     }
 

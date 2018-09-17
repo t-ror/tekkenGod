@@ -6,24 +6,31 @@
     {{ form_row(form.name) }}
     <a onclick="setCommand('b')">Back</a>
     <a onclick="setCommand('u')">Up</a>
+    <a onclick="setCommand('u/b')">Up-Back</a>
+    <a onclick="setCommand('d/b')">Down-Back</a>
     <a onclick="setCommand('d')">Down</a>
+    <a onclick="setCommand('u/f')">Up-Forward</a>
+    <a onclick="setCommand('d/f')">Down-Forward</a>
     <a onclick="setCommand('f')">Forward</a>
     <a onclick="setCommand('+')">+</a>
     <a onclick="setCommand('~')">~</a>
-    <a onclick="setCommand('/')">/</a>
     <a onclick="setCommand('*')">*</a>
+    <a onclick="setCommand('n')">Neutral</a>
     <a onclick="setCommand('1')">1</a>
     <a onclick="setCommand('2')">2</a>
     <a onclick="setCommand('3')">3</a>
-    <a onclick="setCommand('4')">4</a>
-    <a onclick="setCommand('1+2')">1+2</a>
-    <a onclick="setCommand('1+3')">1+3</a>
-    <a onclick="setCommand('1+4')">1+4</a>
-    <a onclick="setCommand('2+3')">2+3</a>
-    <a onclick="setCommand('2+4')">2+4</a>
-    <a onclick="setCommand('3+4')">3+4</a>
-    <a onclick="setCommand('1+2+3')">1+2+3</a>
-    <a onclick="setCommand('1+2+4')">1+2+4</a>
+    <a onclick="setCommand('4')">4</a><br>
+    <a onclick="setCommand('wr')">While running</a>
+    <a onclick="setCommand('ws')">While standing</a>
+    <a onclick="setCommand('wc')">While crouching</a>
+    <a onclick="setCommand('wh')">When hit</a>
+    <a onclick="setCommand('ir')">In rage</a>
+    <a onclick="setCommand('od')">Opponent down</a><br>
+    {% for stance in stances %}
+    <a onclick="setCommand('{{ stance.name }}')">{{ stance.name }}</a>
+    {% endfor %}
+    <br>
+    <a onclick="clearField('move_command')">Clear</a><br>
     {{ form_row(form.command) }}
     <div id="show_command"></div>
     <a onclick="setHitLevel('h')">High</a>
@@ -44,8 +51,6 @@
     </table>
     {{ form_row(form.counterHit) }}
     {{ form_row(form.damage) }}
-    {{ form_row(form.tracking) }}
-    {{ form_row(form.range) }}
     {{ form_row(form.note) }}
     <div style="float: left; padding-right: 10px">
     {{ form_row(form.submit) }}

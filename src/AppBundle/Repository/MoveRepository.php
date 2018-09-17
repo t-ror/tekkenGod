@@ -29,4 +29,17 @@ class MoveRepository extends EntityRepository
         return $qb->getQuery()
             ->getResult();
     }
+
+    public function getStances($characterId){
+        $qb = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('m')
+            ->from('AppBundle:Character\Move','m')
+            ->where('m.note LIKE :stance')
+            ->andWhere('m.character = :character')
+            ->setParameters(['stance'=>'%stance%', 'character'=> $characterId]);
+
+        return $qb->getQuery()
+            ->getResult();
+    }
 }

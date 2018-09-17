@@ -27,9 +27,7 @@ class MoveType extends AbstractType
         $builder
             ->add(Character\Move::FIELD_NAME, TextType::class,[
                 'label'=>'Name: ',
-                'constraints'=>[
-                    new NotBlank(),
-                ],
+                'required'=>false,
             ])
             ->add(Character\Move::FIELD_COMMAND, TextType::class,[
                 'label'=>'Command: ',
@@ -39,62 +37,40 @@ class MoveType extends AbstractType
             ])
             ->add(Character\Move::FIELD_HIT_LEVEL, TextType::class,[
                 'label'=>'Hit level: ',
-                'constraints'=>[
-                    new NotBlank(),
-                ],
+                'required'=>false,
             ])
             ->add(Character\Move::FIELD_START_UP_FRAME, IntegerType::class,[
                 'label'=>'Start up frame: ',
+                'required'=>false,
                 'constraints'=>[
-                    new NotBlank(),
                     new Type('integer'),
                 ],
             ])
             ->add(Character\Move::FIELD_BLOCK_FRAME, IntegerType::class,[
                 'label'=>'Block frame: ',
+                'required'=>false,
                 'constraints'=>[
-                    new NotBlank(),
                     new Type('integer'),
                 ],
             ])
             ->add(Character\Move::FIELD_HIT_FRAME, TextType::class,[
                 'label'=>'Hit frame: ',
-                'constraints'=>[
-                    new NotBlank(),
-                ],
+                'required'=>false,
             ])
             ->add(Character\Move::FIELD_DAMAGE, IntegerType::class,[
                 'label'=>'Damage: ',
+                'required'=>false,
                 'constraints'=>[
-                    new NotBlank(),
                     new Type('integer'),
-                ],
-            ])
-            ->add(Character\Move::FIELD_TRACKING, ChoiceType::class,[
-                'label'=>'Tracking: ',
-                'constraints'=>[
-                    new NotNull(),
-                ],
-                'choices'=>[
-                    'Left'=>'Left',
-                    'Right'=>'Right',
-                    'Homing'=>'Homing',
                 ],
             ])
             ->add(Character\Move::FIELD_COUNTER_HIT, TextType::class,[
                 'label'=>'Counter hit: ',
-                'constraints'=>[
-                    new NotBlank(),
-                ],
-            ])
-            ->add(Character\Move::FIELD_RANGE, TextType::class,[
-                'label'=>'Range: ',
-                'constraints'=>[
-                    new NotBlank(),
-                ],
+                'required'=>false,
             ])
             ->add(Character\Move::FIELD_NOTE, TextareaType::class,[
                 'label'=>'Note: ',
+                'required'=>false,
             ])
         ;
     }

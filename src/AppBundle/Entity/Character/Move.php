@@ -29,8 +29,6 @@ class Move
     const FIELD_BLOCK_FRAME = 'blockFrame';
     const FIELD_COUNTER_HIT = 'counterHit';
     const FIELD_NOTE = 'note';
-    const FIELD_TRACKING = 'tracking';
-    const FIELD_RANGE = 'range';
     const FIELD_EDIT_DATE = 'editDate';
     const FIELD_CHARACTER = 'character';
     const FIELD_LAUNCHER = 'launcher';
@@ -116,22 +114,6 @@ class Move
      *
      */
     private $note;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="tracking", type="string", length=255, nullable=true)
-     *
-     */
-    private $tracking;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="move_range", type="string", length=255, nullable=true)
-     *
-     */
-    private $range;
 
     /**
      * @var \DateTime
@@ -372,54 +354,6 @@ class Move
     public function getNote()
     {
         return $this->note;
-    }
-
-    /**
-     * Set tracking
-     *
-     * @param string $tracking
-     *
-     * @return Move
-     */
-    public function setTracking($tracking)
-    {
-        $this->tracking = $tracking;
-
-        return $this;
-    }
-
-    /**
-     * Get tracking
-     *
-     * @return string
-     */
-    public function getTracking()
-    {
-        return $this->tracking;
-    }
-
-    /**
-     * Set range
-     *
-     * @param string $range
-     *
-     * @return Move
-     */
-    public function setRange($range)
-    {
-        $this->range = $range;
-
-        return $this;
-    }
-
-    /**
-     * Get range
-     *
-     * @return string
-     */
-    public function getRange()
-    {
-        return $this->range;
     }
 
     /**
