@@ -68,9 +68,14 @@ function setCommand(command){
 
 function convertCommand(text){
     try{
-        var commands = text.split(',');
-        var text = "";
+        var endCommand = "";
         document.getElementById("show_command").innerHTML = "";
+        if (text.search('\\*')>-1){
+            text = text.replace(/[*]/g,",");
+            endCommand += "Hold";
+        }
+        var commands = text.split(',');
+
         for (i = 0; i < commands.length; i++){
             if (commands[i].search('\\+')>0){
                 var direction = "";
@@ -87,7 +92,7 @@ function convertCommand(text){
                     direction = getCommand(tempTextArray[0],"+");
                     tempTextArray[0] = "";
                 }
-                document.getElementById("show_command").innerHTML += direction + getCommand(convertString(tempTextArray), "+")+" ";
+                endCommand += direction + getCommand(convertString(tempTextArray), "+")+" ";
             }else if(commands[i].search('~') > 0){
                 var tempTextArray = commands[i].split('~');
                 var tempText = "<img src='/files/images/controls/[.png'>";
@@ -95,10 +100,12 @@ function convertCommand(text){
                     tempText += getCommand(tempTextArray[j]);
                 }
                 tempText += "<img src='/files/images/controls/].png'>";
-                document.getElementById("show_command").innerHTML += tempText+" ";
+                endCommand += tempText+" ";
             }else{
-                document.getElementById("show_command").innerHTML += getCommand(commands[i])+" ";
+                endCommand += getCommand(commands[i])+" ";
             }
+
+            document.getElementById("show_command").innerHTML = endCommand;
         }
     }catch (e) {
         alert(e);
