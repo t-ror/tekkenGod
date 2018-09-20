@@ -10,3 +10,7 @@
     max-height: 100px;
     max-width: 100px;
 }
+.input-img{
+    min-height: 38px;
+    min-width: 38px;
+}

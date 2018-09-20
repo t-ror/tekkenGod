@@ -6,43 +6,44 @@
     {{ form_row(form.name) }}
     <table style="text-align: center">
         <tr>
-            <td><a onclick="setCommand('u/b')"><img src='/files/images/controls/ub.png'></a></td>
-            <td><a onclick="setCommand('u')"><img src='/files/images/controls/u.png'></a></td>
-            <td><a onclick="setCommand('u/f')"><img src='/files/images/controls/uf.png'></a></td>
+            <td><a onclick="setCommand('u/b')"><img class="input-img" src='/files/images/controls/ub.png'></a></td>
+            <td><a onclick="setCommand('u')"><img class="input-img" src='/files/images/controls/u.png'></a></td>
+            <td><a onclick="setCommand('u/f')"><img class="input-img" src='/files/images/controls/uf.png'></a></td>
             <td rowspan="3">
                 <a class="button" onclick="setCommand('+')">+</a>
                 <a class="button" onclick="setCommand('~')">~</a>
                 <a class="button" onclick="setCommand('*')">*</a>
-                <a class="button" onclick="setCommand('wr')">While running</a>
-                <a class="button" onclick="setCommand('ws')">While standing</a>
-                <a class="button" onclick="setCommand('wc')">While crouching</a>
-                <a class="button" onclick="setCommand('wh')">When hit</a>
-                <a class="button" onclick="setCommand('ir')">In rage</a>
-                <a class="button" onclick="setCommand('od')">Opponent down</a><br>
+
             </td>
             <td></td>
-            <td><a onclick="setCommand('2')"><img src='/files/images/controls/22.png'></a></td>
+            <td><a onclick="setCommand('2')"><img class="input-img" src='/files/images/controls/22.png'></a></td>
             <td></td>
         </tr>
         <tr>
-            <td><a onclick="setCommand('b')"><img src='/files/images/controls/b.png'></a></td>
-            <td><a onclick="setCommand('n')"><img src='/files/images/controls/n.png'></a></td>
-            <td><a onclick="setCommand('f')"><img src='/files/images/controls/f.png'></a></td>
-            <td><a onclick="setCommand('1')"><img src='/files/images/controls/11.png'></a></td>
+            <td><a onclick="setCommand('b')"><img class="input-img" src='/files/images/controls/b.png'></a></td>
+            <td><a onclick="setCommand('n')"><img class="input-img" src='/files/images/controls/n.png'></a></td>
+            <td><a onclick="setCommand('f')"><img class="input-img" src='/files/images/controls/f.png'></a></td>
+            <td><a onclick="setCommand('1')"><img class="input-img" src='/files/images/controls/11.png'></a></td>
             <td></td>
-            <td><a onclick="setCommand('4')"><img src='/files/images/controls/44.png'></a></td>
+            <td><a onclick="setCommand('4')"><img class="input-img" src='/files/images/controls/44.png'></a></td>
         </tr>
         <tr>
-            <td><a onclick="setCommand('d/b')"><img src='/files/images/controls/db.png'></a></td>
-            <td><a onclick="setCommand('d')"><img src='/files/images/controls/d.png'></a></td>
-            <td><a onclick="setCommand('d/f')"><img src='/files/images/controls/df.png'></a></td>
+            <td><a onclick="setCommand('d/b')"><img class="input-img" src='/files/images/controls/db.png'></a></td>
+            <td><a onclick="setCommand('d')"><img class="input-img" src='/files/images/controls/d.png'></a></td>
+            <td><a onclick="setCommand('d/f')"><img class="input-img" src='/files/images/controls/df.png'></a></td>
             <td></td>
-            <td><a onclick="setCommand('3')"><img src='/files/images/controls/33.png'></a></td>
+            <td><a onclick="setCommand('3')"><img class="input-img" src='/files/images/controls/33.png'></a></td>
             <td></td>
         </tr>
     </table>
+    <a class="button" onclick="setCommand('wr')">While running</a>
+    <a class="button" onclick="setCommand('ws')">While standing</a>
+    <a class="button" onclick="setCommand('wc')">While crouching</a>
+    <a class="button" onclick="setCommand('wh')">When hit</a>
+    <a class="button" onclick="setCommand('ir')">In rage</a>
+    <a class="button" onclick="setCommand('od')">Opponent down</a><br>
     {% for stance in stances %}
-    <a onclick="setCommand('{{ stance.name }}')">{{ stance.name }}</a>
+    <a class="button" onclick="setCommand('{{ stance.name }}')">{{ stance.name }}</a>
     {% endfor %}
     <br>
     <a onclick="clearField('move_command')">Clear</a><br>
