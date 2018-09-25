@@ -26,7 +26,7 @@ function getCommand(command, separator = ""){
         "n" : "<img src='/files/images/controls/n.png'>",
         "12" : "<img src='/files/images/controls/1+2.png'>",
         "13" : "<img src='/files/images/controls/1+3.png'>",
-        "14" : "<img src='/files/images/controls/1+3.png'>",
+        "14" : "<img src='/files/images/controls/1+4.png'>",
         "23" : "<img src='/files/images/controls/2+3.png'>",
         "24" : "<img src='/files/images/controls/2+4.png'>",
         "34" : "<img src='/files/images/controls/3+4.png'>",
@@ -60,7 +60,8 @@ function setCommand(command){
         text += command;
         document.getElementById('move_command').value += text;
         lastCommand = command;
-        convertCommand(document.getElementById('move_command').value);
+        document.getElementById("show_command").innerHTML = "";
+        document.getElementById("show_command").innerHTML = convertCommand(document.getElementById('move_command').value);
     }catch (e) {
         alert(e);
     }
@@ -69,7 +70,6 @@ function setCommand(command){
 function convertCommand(text){
     try{
         var endCommand = "";
-        document.getElementById("show_command").innerHTML = "";
         if (text.search('\\*')>-1){
             text = text.replace(/[*]/g,",");
             endCommand += "Hold";
@@ -104,9 +104,8 @@ function convertCommand(text){
             }else{
                 endCommand += getCommand(commands[i])+" ";
             }
-
-            document.getElementById("show_command").innerHTML = endCommand;
         }
+        return endCommand;
     }catch (e) {
         alert(e);
     }

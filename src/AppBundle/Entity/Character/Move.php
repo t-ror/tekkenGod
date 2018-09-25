@@ -32,6 +32,7 @@ class Move
     const FIELD_EDIT_DATE = 'editDate';
     const FIELD_CHARACTER = 'character';
     const FIELD_LAUNCHER = 'launcher';
+    const FIELD_COMMAND_HTML = 'commandHTML';
 
     /**
      * @var int
@@ -131,6 +132,13 @@ class Move
     private $character;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="commandHTML", type="string" , nullable=true, length=1000)
+    */
+    private $commandHTML;
+
+    /**
      * Get id
      *
      * @return integer
@@ -174,6 +182,8 @@ class Move
     public function setCommand($command)
     {
         $this->command = $command;
+
+        $this->setCommandHTML($command);
 
         return $this;
     }
@@ -404,10 +414,108 @@ class Move
         return $this->character;
     }
 
+    /**
+     * @return string
+     */
+    public function getCommandHTML()
+    {
+        return $this->commandHTML;
+    }
+
+    /**
+     * @param string $commandHTML
+     */
+    public function setCommandHTML($commandHTML)
+    {
+        $endCommand = "";
+        if (strpos($commandHTML,'*') !== false){
+            $commandHTML = str_replace('*',',', $commandHTML);
+            $endCommand .= "Hold";
+        }
+        //$this->commandHTML = $commandHTML;
+        if ($commandHTML != null){
+            $commands = explode(',',$commandHTML);
+            foreach ($commands as $command){
+
+                if (strpos($command,'+')) {
+                    $direction = "";
+                    $tempCommand = explode('+', $command);
+                    if (strpos($command, 'f') !== false ||
+                        strpos($command, 'b') !== false ||
+                        strpos($command, 'u') !== false ||
+                        strpos($command, 'd') !== false ||
+                        strpos($command, 'd/f') !== false ||
+                        strpos($command, 'd/b') !== false ||
+                        strpos($command, 'u/f') !== false ||
+                        strpos($command, 'u/b') !== false
+                    ) {
+                        $direction = $this->getTextCommand($tempCommand[0], '+');
+                        $tempCommand[0] = "";
+                    }
+                    $endCommand .= $direction . $this->getTextCommand($this->convertToString($tempCommand), '+');
+                }elseif (strpos($command,'~')){
+                    $tempCommand = $command = explode('~',$command);
+                    $tempText = "<img src='/files/images/controls/[.png'>";
+                    foreach ($tempCommand as $tempCom) {
+                        $tempText .= $this->getTextCommand($tempCom);
+                    }
+                    $tempText .= "<img src='/files/images/controls/].png'>";
+                    $endCommand .= $tempText;
+                }else{
+                    $endCommand .= $this->getCommand($command);
+                }
+            }
+            $this->commandHTML = $endCommand;
+        }
+    }
+
+
     public function __toString()
     {
         return $this->name.', '.$this->command.', '.$this->startUpFrame.', '.$this->blockFrame;
     }
 
+    private function getTextCommand($command, $separator = ""){
+        $commands = [
+            "f" => "<img src='/files/images/controls/f".$separator.".png'>",
+            "b" => "<img src='/files/images/controls/b".$separator.".png'>",
+            "u" => "<img src='/files/images/controls/u".$separator.".png'>",
+            "u/b" => "<img src='/files/images/controls/ub".$separator.".png'>",
+            "u/f" => "<img src='/files/images/controls/uf".$separator.".png'>",
+            "d" => "<img src='/files/images/controls/d".$separator.".png'>",
+            "d/b" => "<img src='/files/images/controls/db".$separator.".png'>",
+            "d/f" => "<img src='/files/images/controls/df".$separator.".png'>",
+            "1" => "<img src='/files/images/controls/1.png'>",
+            "2" => "<img src='/files/images/controls/2.png'>",
+            "3" => "<img src='/files/images/controls/3.png'>",
+            "4" => "<img src='/files/images/controls/4.png'>",
+            "ws" => "While standing",
+            "wr" => "While running",
+            "wc" => "While crouching",
+            "od" => "Opponent down",
+            "wh" => "When hit",
+            "ir" => "In rage",
+            "*" => "Hold",
+            "n" => "<img src='/files/images/controls/n.png'>",
+            "12" => "<img src='/files/images/controls/1+2.png'>",
+            "13" => "<img src='/files/images/controls/1+3.png'>",
+            "14" => "<img src='/files/images/controls/1+4.png'>",
+            "23" => "<img src='/files/images/controls/2+3.png'>",
+            "24" => "<img src='/files/images/controls/2+4.png'>",
+            "34" => "<img src='/files/images/controls/3+4.png'>",
+            "123" => "<img src='/files/images/controls/1+2+3.png'>",
+            "124" => "<img src='/files/images/controls/1+2+4.png'>",
+            "134" => "<img src='/files/images/controls/1+3+4.png'>",
+            "234" => "<img src='/files/images/controls/2+3+4.png'>",
+            "1234" => "<img src='/files/images/controls/1+2+3+4.png'>",
+        ];
+
+        return $commands[$command];
+    }
+
+    private function convertToString($stringArray){
+        sort($stringArray);
+        return implode("",$stringArray);
+    }
 
 }

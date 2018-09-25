@@ -14,37 +14,17 @@
         <a type="button" class="button alert" href="{{ path('delete_character',{'id':character.id}) }}">Delete character</a>
     {% endif %}
     <h2>Moves</h2>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Command</th>
-            <th>Hit level</th>
-            <th>Startup frame</th>
-            <th>Block frame</th>
-            <th>Hit frame</th>
-            <th>Counter hit</th>
-            <th>Note</th>
-            {% if is_granted('ROLE_ADMIN')  %}
-                <th></th>
-            {% endif %}
-        </tr>
         {% for move in character.moves %}
-            <tr>
-                <td>{{ move.name }}</td>
-                <td>{{ move.command }}</td>
-                <td>{{ move.hitLevel }}</td>
-                <td>{{ move.startUpFrame }}</td>
-                <td>{{ move.blockFrame }}</td>
-                <td>{{ move.hitFrame }}</td>
-                <td>{{ move.counterHit }}</td>
-                <td>{{ move.note }}</td>
+            <div>
+                <h4>{{ move.name }}</h4>
+                <div>{{ move.commandHTML }}</div>
+            </div>
                 {% if is_granted('ROLE_ADMIN')  %}
-                    <td><a type="button" class="button alert" href="{{ path('delete_move',{'id':move.id}) }}">Delete</a></td>
+                    <a type="button" class="button alert" href="{{ path('delete_move',{'id':move.id}) }}">Delete</a>
                 {% endif %}
-            </tr>
         {% endfor %}
-    </table>
-{% endblock %}
+    <script src="{{ asset('js/buttonInput.js') }}"></script>
 
+{% endblock %}
 {% block stylesheets %}
 {% endblock %}
